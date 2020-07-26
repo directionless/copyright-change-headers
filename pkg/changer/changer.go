@@ -29,11 +29,12 @@ type replacer interface {
 
 type changer struct {
 	baseLicense    []string
-	license        map[langType]string
 	count          map[langType]int
+	ignoredFiles   []string
+	license        map[langType]string
 	oldLicenses    map[langType][]string
-	replacers      map[langType]replacer
 	regexpCleaners map[*regexp.Regexp][]byte
+	replacers      map[langType]replacer
 }
 
 type Opts func(*changer)
@@ -42,7 +43,6 @@ func WithOldLicense(style langType, lic []byte) Opts {
 	return func(c *changer) {
 		c.oldLicenses[style] = append(c.oldLicenses[style], string(lic))
 	}
-
 }
 
 func WithRegexCleaner(re *regexp.Regexp, repl []byte) Opts {
@@ -52,9 +52,13 @@ func WithRegexCleaner(re *regexp.Regexp, repl []byte) Opts {
 
 }
 
-func New(baseLicense []string, opts ...Opts) *changer {
-	//license := map[langType]string{
+func WithIgnoredFile(f string) Opts {
+	return func(c *changer) {
+		c.ignoredFiles = append(c.ignoredFiles, f)
+	}
+}
 
+func New(baseLicense []string, opts ...Opts) *changer {
 	c := &changer{
 		baseLicense:    baseLicense,
 		replacers:      make(map[langType]replacer),
@@ -147,6 +151,13 @@ func (c *changer) WalkFn(path string, info os.FileInfo, err error) error {
 }
 
 func (c *changer) styleClassifier(path string) langType {
+
+	for _, ig := range c.ignoredFiles {
+		if strings.HasSuffix(path, ig) {
+			return ignoreStyle
+		}
+	}
+
 	switch filepath.Base(path) {
 	case "CMakeLists.txt":
 		return ShStyle

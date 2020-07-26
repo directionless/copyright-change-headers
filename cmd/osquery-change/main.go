@@ -43,6 +43,8 @@ func main() {
 		changer.WithRegexCleaner(regexp.MustCompile(`Copyright \(c\) 20(.*)Facebook, Inc.`),
 			[]byte(`Copyright (c) 2014-present, Facebook, Inc.`)),
 
+		changer.WithIgnoredFile(`devtools/devtools.h`),
+
 		changer.WithOldLicense(changer.CStyle, internal.MustAsset("internal/old-licenses/c1")),
 		changer.WithOldLicense(changer.CStyle, internal.MustAsset("internal/old-licenses/c2")),
 		changer.WithOldLicense(changer.CStyle, internal.MustAsset("internal/old-licenses/c3")),
