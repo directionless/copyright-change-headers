@@ -43,7 +43,11 @@ func main() {
 		changer.WithRegexCleaner(regexp.MustCompile(`Copyright \(c\) 20(.*)Facebook, Inc.`),
 			[]byte(`Copyright (c) 2014-present, Facebook, Inc.`)),
 
+		// Strip windows fileendings
+		changer.WithRegexCleaner(regexp.MustCompile("\r\n"), []byte("\n")),
+
 		changer.WithIgnoredFile(`devtools/devtools.h`),
+		changer.WithIgnoredFile(`install_openssl_formula_dependencies.ps1`),
 
 		changer.WithOldLicense(changer.CStyle, internal.MustAsset("internal/old-licenses/c1")),
 		changer.WithOldLicense(changer.CStyle, internal.MustAsset("internal/old-licenses/c2")),
@@ -53,6 +57,7 @@ func main() {
 		changer.WithOldLicense(changer.CStyle, internal.MustAsset("internal/old-licenses/c6")),
 		changer.WithOldLicense(changer.CStyle, internal.MustAsset("internal/old-licenses/c7")),
 		changer.WithOldLicense(changer.CStyle, internal.MustAsset("internal/old-licenses/c8")),
+		changer.WithOldLicense(changer.CStyle, internal.MustAsset("internal/old-licenses/c9")),
 
 		changer.WithOldLicense(changer.ShStyle, internal.MustAsset("internal/old-licenses/sh1")),
 		changer.WithOldLicense(changer.ShStyle, internal.MustAsset("internal/old-licenses/sh2")),

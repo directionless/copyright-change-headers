@@ -115,6 +115,8 @@ func (c *changer) WalkFn(path string, info os.FileInfo, err error) error {
 	style := c.styleClassifier(path)
 	c.count[style] = c.count[style] + 1
 
+	//fmt.Println(path, " ", style)
+
 	if style == unknownStyle || style == ignoreStyle {
 		return nil
 	}

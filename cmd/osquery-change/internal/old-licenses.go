@@ -8,6 +8,7 @@
 // internal/old-licenses/c6
 // internal/old-licenses/c7
 // internal/old-licenses/c8
+// internal/old-licenses/c9
 // internal/old-licenses/sh1
 // internal/old-licenses/sh2
 // internal/old-licenses/sh3
@@ -235,6 +236,30 @@ func internalOldLicensesC8() (*asset, error) {
 	return a, nil
 }
 
+var _internalOldLicensesC9 = []byte(`/**
+ *  Copyright (c) 2014-present, Facebook, Inc.
+ *  All rights reserved.
+ *
+ *  This source code is licensed in accordance with the terms specified in
+ *  the LICENSE file found in the root directory of this source tree.
+ */
+`)
+
+func internalOldLicensesC9Bytes() ([]byte, error) {
+	return _internalOldLicensesC9, nil
+}
+
+func internalOldLicensesC9() (*asset, error) {
+	bytes, err := internalOldLicensesC9Bytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "internal/old-licenses/c9", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
 var _internalOldLicensesSh1 = []byte(`# Copyright (c) 2014-present, Facebook, Inc.
 # All rights reserved.
 #
@@ -357,6 +382,7 @@ var _bindata = map[string]func() (*asset, error){
 	"internal/old-licenses/c6": internalOldLicensesC6,
 	"internal/old-licenses/c7": internalOldLicensesC7,
 	"internal/old-licenses/c8": internalOldLicensesC8,
+	"internal/old-licenses/c9": internalOldLicensesC9,
 	"internal/old-licenses/sh1": internalOldLicensesSh1,
 	"internal/old-licenses/sh2": internalOldLicensesSh2,
 	"internal/old-licenses/sh3": internalOldLicensesSh3,
@@ -412,6 +438,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"c6": &bintree{internalOldLicensesC6, map[string]*bintree{}},
 			"c7": &bintree{internalOldLicensesC7, map[string]*bintree{}},
 			"c8": &bintree{internalOldLicensesC8, map[string]*bintree{}},
+			"c9": &bintree{internalOldLicensesC9, map[string]*bintree{}},
 			"sh1": &bintree{internalOldLicensesSh1, map[string]*bintree{}},
 			"sh2": &bintree{internalOldLicensesSh2, map[string]*bintree{}},
 			"sh3": &bintree{internalOldLicensesSh3, map[string]*bintree{}},
